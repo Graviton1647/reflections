@@ -308,18 +308,18 @@ public abstract class ReflectionUtils {
                 if (type.contains("[")) {
                     try { return Class.forName(type, false, classLoader); }
                     catch (Throwable e) {
-                        reflectionsExceptions.add(new ReflectionsException("could not get type for name " + typeName, e));
+                       
                     }
                 }
                 try { return classLoader.loadClass(type); }
                 catch (Throwable e) {
-                    reflectionsExceptions.add(new ReflectionsException("could not get type for name " + typeName, e));
+                    
                 }
             }
 
             if (Reflections.log != null && Reflections.log.isTraceEnabled()) {
                 for (ReflectionsException reflectionsException : reflectionsExceptions) {
-                    Reflections.log.trace("could not get type for name " + typeName + " from any class loader", reflectionsException);
+                    
                 }
             }
 
