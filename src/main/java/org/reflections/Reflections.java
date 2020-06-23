@@ -192,13 +192,13 @@ public class Reflections {
     protected void scan() {
         if (configuration.getUrls() == null || configuration.getUrls().isEmpty()) {
             if (log != null) {
-                log.warn("given scan urls are empty. set urls in the configuration");
+
             }
             return;
         }
 
         if (log != null && log.isTraceEnabled()) {
-            log.trace("going to scan these urls: {}", configuration.getUrls());
+
         }
 
         long time = System.currentTimeMillis();
@@ -211,7 +211,7 @@ public class Reflections {
                 if (executorService != null) {
                     futures.add(executorService.submit(() -> {
                         if (log != null && log.isTraceEnabled()) {
-                            log.trace("[{}] scanning {}", Thread.currentThread().toString(), url);
+
                         }
                         scan(url);
                     }));
@@ -221,7 +221,7 @@ public class Reflections {
                 scannedUrls++;
             } catch (ReflectionsException e) {
                 if (log != null) {
-                    log.warn("could not create Vfs.Dir from url. ignoring the exception and continuing", e);
+
                 }
             }
         }
@@ -241,12 +241,7 @@ public class Reflections {
             executorService.shutdown();
         }
 
-        if (log != null) {
-            log.info(format("Reflections took %d ms to scan %d urls, producing %s %s",
-                    System.currentTimeMillis() - time, scannedUrls, producingDescription(store),
-                    executorService instanceof ThreadPoolExecutor ?
-                            format("[using %d cores]", ((ThreadPoolExecutor) executorService).getMaximumPoolSize()) : ""));
-        }
+
     }
 
     private static String producingDescription(Store store) {
@@ -278,7 +273,7 @@ public class Reflections {
                         } catch (Exception e) {
                             if (log != null && log.isTraceEnabled()) {
                                 // SLF4J will filter out Throwables from the format string arguments.
-                                log.trace("could not scan file {} in url {} with scanner {}", file.getRelativePath(), url.toExternalForm(), scanner.getClass().getSimpleName(), e);
+
                             }
                         }
                     }
@@ -325,10 +320,7 @@ public class Reflections {
             }
         }
 
-        if (log != null) {
-            log.info(format("Reflections took %d ms to collect %d url, producing %s",
-                    System.currentTimeMillis() - start, urls.size(), producingDescription(reflections.store)));
-        }
+
         return reflections;
     }
 
